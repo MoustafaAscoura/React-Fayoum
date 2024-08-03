@@ -1,17 +1,20 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import birdImage from "../../assets/images/bird.webp"
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 function BasicExample(props) {
     const {title:title_from_props, number: card_number, onClickButton} = props
 
     const [title, setTitle] = useState(title_from_props)
 
+    const imgRef = useRef()
+
     const title_length = title.length
 
     useEffect(()=>{
         console.log("Component Rendered / Updated")
+        console.log("Image source:", imgRef.current?.dataset.value)
         return console.log("When component get unmounted")
     }, [])
 
@@ -27,7 +30,7 @@ function BasicExample(props) {
 
   return (
     <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={birdImage} />
+      <Card.Img variant="top" src={birdImage} ref={imgRef} data-value="3" />
       <Card.Body>
         <Card.Title>Card Number: {card_number}</Card.Title>
         <Card.Text>
