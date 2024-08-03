@@ -11,7 +11,7 @@ function CardInfo () {
 
     return <>
         <input type="text" className="mb-3" onChange={changeTitle}/>
-        <h5 class="card-title">{title}</h5>
+        <h5 className={`card-title`}>{title}</h5>
         <p style={{color: title === "Short Title" ? "green" : "red"}} >Card Description</p>
     </>
 }
