@@ -1,21 +1,49 @@
-import { useState } from "react"
-import CardInfo from "../CardInfo/CardInfo"
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import birdImage from "../../assets/images/bird.webp"
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
-export default function Card () {
-    
-    const [today, setToday] = useState(new Date())
+function BasicExample(props) {
+    const {title:title_from_props, number: card_number, onClickButton} = props
 
+    const [title, setTitle] = useState(title_from_props)
 
-    return <div className="Card" style={{width: '18 rem'}}>
-        <img src="https://base-prod.rspb-prod.magnolia-platform.com/.imaging/focalpoint/_WIDTH_x_HEIGHT_/dam/jcr:71eda09d-9010-474a-8404-cba78c2489d6/654943777-Species-Swallow-flying-over-water.jpg" className="card-img-top" alt="card-image"/>
-        <hr/>
-        <div className="card-body">
-        
-        <CardInfo/>
-        <p className="card-text">Todays date: {today.toLocaleString()}</p>
-        <button className="btn btn-primary" onClick={(event) => {
-            setToday(new Date())
-        }}>Update Date</button>
-        </div>
-    </div>
+    const title_length = title.length
+
+    useEffect(()=>{
+        console.log("Component Rendered / Updated")
+        return console.log("When component get unmounted")
+    }, [])
+
+    const title_length_memoized = useMemo(()=>{
+        return title.length
+    }, [title])
+
+    // useCallback() - Day 03
+
+    const changeTitle = () => {
+        setTitle("Card number")
+    }
+
+  return (
+    <Card style={{ width: '18rem' }}>
+      <Card.Img variant="top" src={birdImage} />
+      <Card.Body>
+        <Card.Title>Card Number: {card_number}</Card.Title>
+        <Card.Text>
+          Some quick example text to build on the card title and make up the
+          bulk of the card's content.
+          <br/>
+          Title Length: {title_length}
+          <br/>
+          Title Length Memoized: {title_length_memoized}
+          <br/>
+          Original Title was: {title_from_props}
+        </Card.Text>
+        <Button variant="primary" onClick={(e)=>onClickButton()}>Go somewhere</Button>
+      </Card.Body>
+    </Card>
+  );
 }
+
+export default BasicExample;
