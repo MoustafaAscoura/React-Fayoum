@@ -3,7 +3,7 @@ import MusicCard from "../../components/Card/Card";
 import React from "react";
 
 export default function FavoritesPage() {
-  const favList = useSelector((state) => state.favList.favList);
+  const favList = useSelector((store) => store.favList.favList);
 
   return (
     <>
